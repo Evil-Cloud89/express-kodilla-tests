@@ -7,6 +7,8 @@ app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './views/layouts', defaultLa
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.render('index');
@@ -30,6 +32,10 @@ app.get('/info', (req, res) => {
 
 app.get('/history', (req, res) => {
   res.render('history');
+});
+
+app.post('/contact/send-message', (req, res) => {
+  res.json(req.body);
 });
 
 app.use((req, res) => {
